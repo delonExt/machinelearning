@@ -73,6 +73,12 @@ def model_info():
     if model is None:
         return jsonify({'error': 'Model not loaded'}), 503
     
+    def _get_layer_output_shape(layer):
+        try:
+            return str(layer.output.shape)
+        except Exception:
+            return 'N/A'
+    
     return jsonify({
         'name': model.name,
         'input_shape': str(model.input_shape),
@@ -82,7 +88,7 @@ def model_info():
             {
                 'name': layer.name,
                 'type': layer.__class__.__name__,
-                'output_shape': str(layer.output.shape) if hasattr(layer, 'output') else 'N/A'
+                'output_shape': _get_layer_output_shape(layer)
             }
             for layer in model.layers
         ],
