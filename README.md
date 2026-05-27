@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🧠 YeoCycles — Machine Learning Service
 
@@ -190,8 +190,9 @@ machinelearning/
 │   └── sample_data.csv          # 📊 Training dataset (95 records, 8 users)
 │
 ├── model/
-│   ├── lstm_model.h5            # 🧠 Trained model (HDF5) — gitignored
+│   ├── lstm_model.h5            # 🧠 Trained model (HDF5)
 │   ├── lstm_model.keras         # 🧠 Trained model (Keras format)
+│   ├── best_model.keras         # 🏆 Best model checkpoint (EarlyStopping)
 │   ├── scaler_X.pkl             # 📐 Feature scaler
 │   └── scaler_y.pkl             # 📐 Target scaler
 │
@@ -362,4 +363,4 @@ Untuk detail mendalam, lihat:
 Dibuat oleh **Ridho dan teman-teman** — Capstone Project Coding Camp 2026
 
 **Powered by [kamidukung.biz.id](https://kamidukung.biz.id/)**
-]]>
+

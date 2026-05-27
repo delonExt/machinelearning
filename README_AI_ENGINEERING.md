@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 🧠 AI Engineering — YeoCycles ML Service
 
@@ -529,4 +529,4 @@ Epoch 120: Loss: 0.00300 | Val Loss: 0.00600 | 🏁 EarlyStopping triggered
 **Powered by [kamidukung.biz.id](https://kamidukung.biz.id/)**
 
 </div>
-]]>
+

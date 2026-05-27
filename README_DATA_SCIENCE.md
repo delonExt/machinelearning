@@ -1,4 +1,4 @@
-<![CDATA[<div align="center">
+<div align="center">
 
 # 📊 Data Science — YeoCycles ML Service
 
@@ -531,4 +531,4 @@ streamlit run streamlit_app.py
 **Powered by [kamidukung.biz.id](https://kamidukung.biz.id/)**
 
 </div>
-]]>
+
