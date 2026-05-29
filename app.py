@@ -24,9 +24,7 @@ CORS(app)
 
 # Load model on startup
 model = None
-MODEL_PATH = 'model/lstm_model.keras'
 MODEL_PATH_H5 = 'model/lstm_model.h5'
-
 
 def load_model():
     """Load trained model with custom objects support."""
@@ -37,23 +35,21 @@ def load_model():
         'CyclePredictionLoss': CyclePredictionLoss,
     }
     
-    # Try .keras format first (production), then .h5 (legacy)
-    for path in [MODEL_PATH, MODEL_PATH_H5]:
-        if os.path.exists(path):
-            try:
-                model = keras.models.load_model(path, custom_objects=custom_objects)
-                model.compile(
-                    optimizer='adam',
-                    loss=CyclePredictionLoss(delta=1.0, range_weight=0.1),
-                    metrics=['mae']
-                )
-                print(f"✅ Model loaded from {path}")
-                return
-            except Exception as e:
-                print(f"⚠️  Error loading model from {path}: {e}")
-                continue
+    # Langsung load format .h5
+    if os.path.exists(MODEL_PATH_H5):
+        try:
+            model = keras.models.load_model(MODEL_PATH_H5, custom_objects=custom_objects)
+            model.compile(
+                optimizer='adam',
+                loss=CyclePredictionLoss(delta=1.0, range_weight=0.1),
+                metrics=['mae']
+            )
+            print(f"✅ Model loaded from {MODEL_PATH_H5}")
+            return
+        except Exception as e:
+            print(f"⚠️ Error loading model from {MODEL_PATH_H5}: {e}")
     
-    print(f"⚠️  No model found. Run train.py first.")
+    print(f"⚠️ No model found at {MODEL_PATH_H5}. Run train.py first.")
     model = None
 
 
@@ -63,7 +59,7 @@ def health():
     return jsonify({
         'status': 'ok',
         'model_loaded': model is not None,
-        'model_format': 'keras' if os.path.exists(MODEL_PATH) else 'h5' if os.path.exists(MODEL_PATH_H5) else 'none'
+        'model_format': 'h5' if os.path.exists(MODEL_PATH_H5) else 'none'
     })
 
 
@@ -180,6 +176,6 @@ def predict():
 
 if __name__ == '__main__':
     load_model()
-    print("🚀 ML Service running on http://localhost:5001")
+    print("🚀 ML Service running on https://machinelearning-production-8496.up.railway.app/")
     print("   Endpoints: /health, /predict, /model-info")
     app.run(host='0.0.0.0', port=5001, debug=False)
